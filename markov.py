@@ -2,7 +2,7 @@
 
 import os
 import discord
-from random import choice,random,choices
+from random import choice
 
 
 from discord import channel
@@ -77,9 +77,12 @@ chains = make_chains(text)
 
 client = discord.Client()
 
-random_phrase = ['Toast is always good toasted', "Never swim with a toaster plugged in", "The sun is a bright star, shoot for that", "A faithful friend is a strong defense", " A fresh start will put you on your way", "Believe it can be done"]
+random_phrase = (['Toast is always good toasted', "Never swim with a toaster plugged in", "The sun is a bright star, shoot for that",
+                   "A faithful friend is a strong defense", " A fresh start will put you on your way", "Believe it can be done",
+                   "Disbelief destroys the magic", "Don't make extra work for yourself", "Don't spend time, invest it."
+                   ])
 thankful_phrase = ['Why thank you sir/madam', "I am glad you noticed me", "I am just trying to do my best"]
-greeting = ['hello there', 'Yes, what can I share with you?', 'Good bots', "Hello"]
+greeting = ['hello there', 'Yes, what can I share with you?', 'I am a good bot', "Hello"]
 
 @client.event
 async def on_ready():
