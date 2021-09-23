@@ -1,7 +1,13 @@
 """A Markov chain generator that can tweet random messages."""
 
-import sys
-from random import choice
+import os
+import discord
+from random import choice,random,choices
+
+
+from discord import channel
+
+
 
 
 def open_and_read_file(filenames):
@@ -34,7 +40,7 @@ def make_chains(text_string):
     return chains
 
 
-def make_text(chains):
+def make_text(chains, char_limit=4000):
     """Take dictionary of Markov chains; return random text."""
 
     keys = list(chains.keys())
@@ -44,7 +50,8 @@ def make_text(chains):
     while key in chains:
         # Keep looping until we have a key that isn't in the chains
         # (which would mean it was the end of our original text).
-
+        if char_limit and len(' '.join(words)) > char_limit:
+            break
         # Note that for long texts (like a full book), this might mean
         # it would run for a very long time.
 
@@ -55,12 +62,46 @@ def make_text(chains):
     return ' '.join(words)
 
 
-# Get the filenames from the user through a command line prompt, ex:
+# Get the filenames from the user through a command line prompt, ex:\
+
 # python markov.py green-eggs.txt shakespeare.txt
-filenames = sys.argv[1:]
+filenames = ['green-eggs.txt']
 
 # Open the files and turn them into one long string
 text = open_and_read_file(filenames)
 
 # Get a Markov chain
 chains = make_chains(text)
+
+# print(make_text(chains))
+
+client = discord.Client()
+
+random_phrase = ['Toast is always good toasted', "Never swim with a toaster plugged in", "The sun is a bright star, shoot for that"]
+
+@client.event
+async def on_ready():
+    print(f'Successfully connected! Logged in as {client.user}.')
+
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+
+    if message.content.startswith('Good bots'):
+        await message.channel.send('Why thank you good sir!')
+    
+
+    if message.content.startswith('tell me something'):
+        await message.channel.send(make_text(chains))
+    
+    if message.content.startswith('words of wisdom'):
+        await message.channel.send(choice(random_phrase))
+
+
+
+
+
+client.run(os.environ["DISCORD_TOKEN"])
