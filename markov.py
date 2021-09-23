@@ -65,7 +65,7 @@ def make_text(chains, char_limit=4000):
 # Get the filenames from the user through a command line prompt, ex:\
 
 # python markov.py green-eggs.txt shakespeare.txt
-filenames = ['green-eggs.txt']
+filenames = ['green-eggs.txt', 'gettysburg.txt']
 
 # Open the files and turn them into one long string
 text = open_and_read_file(filenames)
@@ -77,7 +77,8 @@ chains = make_chains(text)
 
 client = discord.Client()
 
-random_phrase = ['Toast is always good toasted', "Never swim with a toaster plugged in", "The sun is a bright star, shoot for that"]
+random_phrase = ['Toast is always good toasted', "Never swim with a toaster plugged in", "The sun is a bright star, shoot for that", "A faithful friend is a strong defense", " A fresh start will put you on your way", "Believe it can be done"]
+thankful_phrase = ['Why thank you sir/madam', "I am glad you noticed me", "I am just trying to do my best"]
 
 @client.event
 async def on_ready():
@@ -91,7 +92,7 @@ async def on_message(message):
 
 
     if message.content.startswith('Good bots'):
-        await message.channel.send('Why thank you good sir!')
+        await message.channel.send(choice(thankful_phrase))
     
 
     if message.content.startswith('tell me something'):
