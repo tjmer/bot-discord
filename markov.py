@@ -97,10 +97,10 @@ async def on_message(message):
         await message.channel.send(choice(thankful_phrase))
     
 
-    if 'tell me something' in message.content.lower():
+    if any(x in msg for x in ['tell me something', 'tell me a story', 'something']):
         await message.channel.send(make_text(chains))
     
-    if 'words of wisdom' in message.content.lower():
+    if any(c in msg for c in ['words of wisdom', 'wisdom']):
         await message.channel.send(choice(random_phrase))
 
     if any(m in msg for m in ['wise man', 'hello']):
