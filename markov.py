@@ -61,7 +61,7 @@ def make_text(chains, char_limit=4000):
 # Get the filenames from the user through a command line prompt, ex:\
 
 # python markov.py green-eggs.txt shakespeare.txt
-filenames = ['green-eggs.txt', 'gettysburg.txt']
+filenames = ['green-eggs.txt', 'twister.txt']
 
 # Open the files and turn them into one long string
 text = open_and_read_file(filenames)
@@ -91,20 +91,22 @@ async def on_message(message):
         return
 
 
-    if message.content.startswith('Good bots'):
+    if 'good bots' in message.content.lower():
         await message.channel.send(choice(thankful_phrase))
     
 
-    if message.content.startswith('tell me something'):
+    if 'tell me something' in message.content.lower():
         await message.channel.send(make_text(chains))
     
-    if message.content.startswith('words of wisdom'):
+    if 'words of wisdom' in message.content.lower():
         await message.channel.send(choice(random_phrase))
 
-    if message.content.startswith('Wise man'):
+    if  'wise man' in message.content.lower():
         await message.channel.send(choice(greeting))
 
 
 
 
-client.run(os.environ.get["DISCORD_TOKEN"])
+client.run(os.environ["DISCORD_TOKEN"])
+
+# remember to run source secrets.sh to make a path
