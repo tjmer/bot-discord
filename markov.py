@@ -104,6 +104,8 @@ async def on_message(message):
     if  'wise man' in message.content.lower():
         await message.channel.send(choice(greeting))
 
+    if 'hello' in message.content.lower():
+        await message.channel.send(choice(greeting))
 
 
 
