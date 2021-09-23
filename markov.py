@@ -79,6 +79,7 @@ client = discord.Client()
 
 random_phrase = ['Toast is always good toasted', "Never swim with a toaster plugged in", "The sun is a bright star, shoot for that", "A faithful friend is a strong defense", " A fresh start will put you on your way", "Believe it can be done"]
 thankful_phrase = ['Why thank you sir/madam', "I am glad you noticed me", "I am just trying to do my best"]
+greeting = ['hello there', 'Yes, what can I share with you?', 'Good bots', "Hello"]
 
 @client.event
 async def on_ready():
@@ -101,6 +102,8 @@ async def on_message(message):
     if message.content.startswith('words of wisdom'):
         await message.channel.send(choice(random_phrase))
 
+    if message.content.startswith('Wise man'):
+        await message.channel.send(choice(greeting))
 
 
 
