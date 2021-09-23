@@ -80,6 +80,7 @@ random_phrase = (['Toast is always good toasted', "Never swim with a toaster plu
 thankful_phrase = ['Why thank you sir/madam', "I am glad you noticed me", "I am just trying to do my best"]
 greeting = ['hello there', 'Yes, what can I share with you?', 'I am a good bot', "Hello"]
 
+
 @client.event
 async def on_ready():
     print(f'Successfully connected! Logged in as {client.user}.')
@@ -87,6 +88,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    msg = message.content.lower()
     if message.author == client.user:
         return
 
@@ -101,11 +103,9 @@ async def on_message(message):
     if 'words of wisdom' in message.content.lower():
         await message.channel.send(choice(random_phrase))
 
-    if  'wise man' in message.content.lower():
+    if any(m in msg for m in ['wise man', 'hello']):
         await message.channel.send(choice(greeting))
 
-    if 'hello' in message.content.lower():
-        await message.channel.send(choice(greeting))
 
 
 
