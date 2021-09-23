@@ -5,10 +5,6 @@ import discord
 from random import choice
 
 
-from discord import channel
-
-
-
 
 def open_and_read_file(filenames):
     """Take list of files. Open them, read them, and return one long string."""
